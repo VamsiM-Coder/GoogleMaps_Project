@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Maps Popup</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAS-RQny2E31aq-wUAMwoD7BgTOCioiup4"></script>
+  </head>
+  <body>
+    <div id="map" style="height: 400px; width: 100%;"></div>
+
+    <script>
+      function initMap() {
+        var myLatLng = {lat: -25.363, lng: 131.044}; // Set your desired coordinates here
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: myLatLng
+        });
+
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Click to see the popup!'
+        });
+
+        var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">Your Popup Title</h1>'+
+            '<div id="bodyContent">'+
+            '<p>Your Popup Content.</p>'+
+            '</div>'+
+            '</div>';
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAS-RQny2E31aq-wUAMwoD7BgTOCioiup4&callback=initMap">
+    </script>
+  </body>
+</html>

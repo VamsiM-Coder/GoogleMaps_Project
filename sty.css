@@ -1,0 +1,17 @@
+#map {
+   width: 90%;
+  margin:auto;
+  height: 100%;
+  }
+  
+  /* 
+   * Optional: Makes the sample page fill the window. 
+   */
+  html,
+  body {
+    height: 100%;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+  }
+  

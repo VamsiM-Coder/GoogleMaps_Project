@@ -1,47 +1,68 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Google Maps Popup</title>
+    <title>India Danger Zones</title>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAS-RQny2E31aq-wUAMwoD7BgTOCioiup4"></script>
   </head>
   <body>
-    <div id="map" style="height: 400px; width: 100%;"></div>
+    <div id="map" style="height: 600px; width: 100%;"></div>
 
     <script>
       function initMap() {
-        var myLatLng = {lat: -25.363, lng: 131.044}; // Set your desired coordinates here
-
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: myLatLng
+          zoom: 5,
+          center: { lat: 20.5937, lng: 78.9629 } // Centered on India
         });
 
-        var marker = new google.maps.Marker({
-          position: myLatLng,
-          map: map,
-          title: 'Click to see the popup!'
-        });
+        var locations = [
+          {
+            position: { lat: 28.7041, lng: 77.1025 },
+            title: "Delhi",
+            content: "High air pollution levels."
+          },
+          {
+            position: { lat: 19.076, lng: 72.8777 },
+            title: "Mumbai",
+            content: "Flood-prone areas during monsoons."
+          },
+          {
+            position: { lat: 26.9124, lng: 75.7873 },
+            title: "Jaipur",
+            content: "Extreme heat waves in summer."
+          },
+          {
+            position: { lat: 15.2993, lng: 74.124 },
+            title: "Goa",
+            content: "Coastal erosion and rising sea levels."
+          },
+          {
+            position: { lat: 22.5726, lng: 88.3639 },
+            title: "Kolkata",
+            content: "Frequent cyclones and flooding."
+          }
+        ];
 
-        var contentString = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Your Popup Title</h1>'+
-            '<div id="bodyContent">'+
-            '<p>Your Popup Content.</p>'+
-            '</div>'+
-            '</div>';
+        locations.forEach(function(location) {
+          var marker = new google.maps.Marker({
+            position: location.position,
+            map: map,
+            title: location.title
+          });
 
-        var infowindow = new google.maps.InfoWindow({
-          content: contentString
-        });
+          var infowindow = new google.maps.InfoWindow({
+            content: `<div><h3>${location.title}</h3><p>${location.content}</p></div>`
+          });
 
-        marker.addListener('click', function() {
-          infowindow.open(map, marker);
+          marker.addListener('click', function() {
+            infowindow.open(map, marker);
+          });
         });
       }
     </script>
+
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAS-RQny2E31aq-wUAMwoD7BgTOCioiup4&callback=initMap">
     </script>
   </body>
 </html>
+    
